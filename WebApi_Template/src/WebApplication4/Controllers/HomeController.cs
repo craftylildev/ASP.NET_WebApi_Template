@@ -49,5 +49,24 @@ namespace WebApi_Template.Controllers
         // List all the artist on a particular album you like(hint, will need to pass an album id in the calling url to the action)
 
 
+        //List all of the albums by your favorite artist.
+        public IEnumerable<AlbumTitle> FavArtistAlbums(string artistName)
+        {
+            var products = (from al in dbContext.Album
+                            join ar in dbContext.Artist
+                            on al.ArtistId equals ar.ArtistId
+                            where ar.Name == artistName
+                            select new AlbumTitle
+                            {
+                                Title = al.Title
+                            })
+                           .ToList();
+            return products;
+        }
+
+        // Create a class that will hold information regarding concerts you would like to attend. 
+        // Create a list containing your concerts of choice. Set up several properties. 
+        // Query your favorite concert list.
+
     }
 }
