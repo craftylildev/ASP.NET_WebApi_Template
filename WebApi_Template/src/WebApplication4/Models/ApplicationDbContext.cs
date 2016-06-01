@@ -7,14 +7,14 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 
 
-
-
 namespace WebApi_Template.Models
 {
     public class ApplicationDbContext : DbContext
     {
  
-        public DbSet<ModelOne> ModelOne { get; set; }
+        public DbSet<Album> Album { get; set; }
+        public DbSet<Artist> Artist { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
