@@ -68,5 +68,26 @@ namespace WebApi_Template.Controllers
         // Create a list containing your concerts of choice. Set up several properties. 
         // Query your favorite concert list.
 
+        public List<Concert> FavConcert(string artistName) ///Home/FavConcert?ArtistName=Alice In Chains
+        {
+
+            var concert = new EventListing();
+
+            var products = (from ar in dbContext.Artist
+                           join co in concert.EventList
+                           on ar.ArtistId equals co.ArtistId
+                           where ar.Name == artistName
+                           select new Concert
+                           {
+                               ArtistId = co.ArtistId,
+                               ArtistName = ar.Name,
+                               ConcertName = co.ConcertName,
+                               ConcertDate = co.ConcertDate
+
+                           }).ToList();
+
+            return products;
+
+        }
     }
 }
